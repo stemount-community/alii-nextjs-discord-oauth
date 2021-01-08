@@ -22,9 +22,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async function (
   const user = parseUser(ctx);
 
   if (!user) {
-    ctx.res.statusCode = 307;
-    ctx.res.setHeader("Location", "/api/oauth");
-    ctx.res.end();
+    return { redirect: { destination: "/api/oauth", permanent: false } };
   }
 
   return { props: { user } };
